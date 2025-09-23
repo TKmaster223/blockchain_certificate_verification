@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-app = FastAPI()
+app = FastAPI(title="Blockchain Certificate Verification System")
 
 
 @app.get("/")
