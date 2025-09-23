@@ -1,13 +1,11 @@
 from fastapi import FastAPI
+from backend.routers import certificates, corrections
 
 app = FastAPI(title="Blockchain Certificate Verification System")
 
+app.include_router(certificates.router)
+app.include_router(corrections.router)
 
 @app.get("/")
-async def root():
-    return {"message": "Hello World"}
-
-
-@app.get("/hello/{name}")
-async def say_hello(name: str):
-    return {"message": f"Hello {name}"}
+def root():
+    return {"message": "Certificate Verification API Running"}
