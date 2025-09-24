@@ -1,7 +1,9 @@
 from fastapi import APIRouter, Depends
+
+from backend.routers.auth import get_current_user
 from backend.schemas import CertificateCreate, CertificateOut
 from backend.db import db
-from backend.auth import get_current_user
+from .auth import get_current_user
 from datetime import datetime
 
 router = APIRouter(prefix="/certificates", tags=["Certificates"])

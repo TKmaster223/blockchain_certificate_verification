@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+
 from backend.routers import certificates, corrections
 
 app = FastAPI(title="Blockchain Certificate Verification System")

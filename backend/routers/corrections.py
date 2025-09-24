@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends
 from backend.schemas import CorrectionCreate, CorrectionOut
 from backend.db import db
-from backend.auth import get_current_user
+from .auth import get_current_user
 from datetime import datetime
 
 router = APIRouter(prefix="/corrections", tags=["Corrections"])

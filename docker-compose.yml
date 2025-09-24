@@ -1,0 +1,45 @@
+services:
+  backend:
+    build: ./backend
+    container_name: backend_service
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+      - quorum
+    environment:
+      - MONGO_URL=mongodb://mongo:27017/certificates
+      - BLOCKCHAIN_URL=http://quorum:8545
+    volumes:
+      - ./backend:/app
+
+  mongo:
+    image: mongo:6
+    container_name: mongo_service
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  quorum:
+    image: consensys/quorum:23.7.0
+    container_name: quorum_service
+    restart: always
+    ports:
+      - "8545:8545"   # RPC endpoint
+      - "30303:30303" # P2P
+    command: [
+      "--http",
+      "--http.addr", "0.0.0.0",
+      "--http.api", "eth,net,web3,admin,personal,txpool",
+      "--allow-insecure-unlock",
+      "--nodiscover"
+    ]
+    volumes:
+      - quorum_data:/data
+
+volumes:
+  mongo_data:
+  quorum_data:
+
